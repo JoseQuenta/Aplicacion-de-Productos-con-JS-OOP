@@ -37,13 +37,28 @@ class UI{
         document.getElementById('product-form').reset();
     }
 
-    deleteProduct(){
-
-
+    deleteProduct(element){
+        if(element.name === 'delete'){
+            element.parentElement.parentElement.parentElement.remove();
+            //para mostrar mensaje es igual que colocarlo en el DOM ... interesting
+            this.showMessage('Product deleted successfully', 'danger')
+        }
+        
     }
 
-    showMessage(){
-
+    showMessage(message, cssClass){
+        const div = document.createElement('div');
+        div.className = `alert alert-${cssClass}`;
+        div.appendChild(document.createTextNode(message));
+        // showing in DOM
+        const container = document.querySelector('.container');
+        const app = document.querySelector('#App');
+        container.insertBefore(div, app);
+        //timer added
+        setTimeout(function() {
+            document.querySelector('.alert').remove();
+        }, 1500);
+        
     }
 }
 
@@ -57,10 +72,19 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     const product = new Product(name, price, year);
 
     const ui = new UI();
+    
+    //para verificar que los campos esten completos
+    if(name === '' || price === '' || year === ''){
+        return ui.showMessage('Complete fields please', 'danger')
+    }
+    
     ui.addProduct(product);
-
+    
     //para limpiar casillas
     ui.resetForm();
+
+    //para mostrar mensaje
+    ui.showMessage('Product added Successfully', 'success');
     
     //console.log(product);
 
@@ -71,6 +95,17 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     //minuto 39 fazt - aplicacion de productos con JS orientado a objetos
 })
 
+//document.getElementById('name').focus();
+
 document.getElementById('product-list').addEventListener('click', function(e){
-    console.log(e.target);
+    const ui = new UI();
+    ui.deleteProduct(e.target);
+    //para mostrar mensaje
+    //ui.showMessage('Product deleted Successfully', 'danger');
+
 });
+
+// 1. guardarlo en el navegador local storage
+// 2. crear un servidor restApi nodejs py, java, recibir, y 
+// 3. Pedirias datos y mostrar en pantalla
+// *. Framework ayuda 
