@@ -20,14 +20,25 @@ class UI{
                     <strong>Product</strong>: ${product.name}
                     <strong>Product name</strong>: ${product.price}
                     <strong>Product year</strong>: ${product.year}
+                    <a href="#" class="btn btn-danger" name="delete">Delete</a>
+                    
                 </div>
             </div>
         
         `;
         productList.appendChild(element)
+        
+        //Se puede colocar aqui el reset form o en la interfaz
+        //this.resetForm()
+    }
+
+    //para limpiar casillas
+    resetForm(){
+        document.getElementById('product-form').reset();
     }
 
     deleteProduct(){
+
 
     }
 
@@ -47,6 +58,9 @@ document.getElementById('product-form').addEventListener('submit', function(e){
 
     const ui = new UI();
     ui.addProduct(product);
+
+    //para limpiar casillas
+    ui.resetForm();
     
     console.log(product);
 
