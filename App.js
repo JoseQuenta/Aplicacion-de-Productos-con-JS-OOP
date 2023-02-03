@@ -62,7 +62,7 @@ document.getElementById('product-form').addEventListener('submit', function(e){
     //para limpiar casillas
     ui.resetForm();
     
-    console.log(product);
+    //console.log(product);
 
     e.preventDefault();
 
@@ -70,3 +70,7 @@ document.getElementById('product-form').addEventListener('submit', function(e){
 
     //minuto 39 fazt - aplicacion de productos con JS orientado a objetos
 })
+
+document.getElementById('product-list').addEventListener('click', function(e){
+    console.log(e.target);
+});
